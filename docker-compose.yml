@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  mysql:
+    container_name: mysql-training
+    image: mysql:5.7
+    volumes:
+      - training-inventory-data:/var/lib/mysql
+      - ./schema_trainingFinal.sql:/docker-entrypoint-initdb.d/schema_trainingFinal.sql
+    ports:
+      -  "3307:3306"
+    environment: 
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: jdbcEjemplo
+    command: --init-file /docker-entrypoint-initdb.d/schema_trainingFinal.sql
+volumes:
+  training-inventory-data:
